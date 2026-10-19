@@ -1,0 +1,24 @@
+{
+  "name": "starbug/macro",
+  "description": "A token/macro parsing and replacement engine.",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Ali Gangji",
+      "homepage": "https://github.com/cogentParadigm"
+    }
+  ],
+  "extra": {
+    "starbug": {
+      "namespace": "Starbug\\Macro"
+    }
+  },
+  "require": {
+    "psr/container": "^1.1 || ^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Starbug\\Macro\\": "src/"
+    }
+  }
+}
