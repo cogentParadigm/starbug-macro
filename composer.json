@@ -16,9 +16,23 @@
   "require": {
     "psr/container": "^1.1 || ^2.0"
   },
+  "require-dev": {
+    "starbug/devel": "^1.0",
+    "phpunit/phpunit": "^9.0"
+  },
   "autoload": {
     "psr-4": {
       "Starbug\\Macro\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Starbug\\Macro\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "phpunit": "vendor/bin/phpunit",
+    "phpcs": "vendor/bin/phpcs --extensions=php --standard=vendor/starbug/standard/phpcs.xml --ignore=./vendor/ ./",
+    "phpcbf": "vendor/bin/phpcbf --extensions=php --standard=vendor/starbug/standard/phpcs.xml --ignore=./vendor/ ./"
   }
 }
