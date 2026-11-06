@@ -2,7 +2,7 @@
 namespace Starbug\Macro;
 
 /**
- * An implementation of MacroInteface.
+ * An implementation of MacroInterface.
  */
 class Macro implements MacroInterface {
 
@@ -52,7 +52,7 @@ class Macro implements MacroInterface {
    *
    * @param string $text text content to parse for tokens
    *
-   * @return array an array of tokens
+   * @return string the text with tokens replaced
    */
   public function replace($text, $data = []) {
     // find out what tokens we need to replace
@@ -83,17 +83,17 @@ class Macro implements MacroInterface {
    * @return array an associative array of replacements
    */
   private function replacements($type, $tokens, $data = []) {
-    $replacements = [];
+    $replacements = array_fill_keys(array_values($tokens), "");
     if ($hook = $this->hookFactory->get($type)) {
       foreach ($tokens as $name => $token) {
         $replacements[$token] = $hook->replace($this, $name, $token, $data);
       }
     }
-    // populate overrides from data
+    // populate overrides from data, including falsy values
     if (!empty($data[$type]) && is_array($data[$type])) {
-      foreach ($tokens as $index => $token) {
-        if (!empty($data[$type][$index])) {
-          $replacements[$token] = $data[$type][$index];
+      foreach ($tokens as $name => $token) {
+        if (array_key_exists($name, $data[$type])) {
+          $replacements[$token] = $data[$type][$name];
         }
       }
     }
